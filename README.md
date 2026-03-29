@@ -18,9 +18,13 @@ Feel free to contact us for any suggestions, issues or anything through our emai
 Email - theartworklabs@gmail.com
 
 Codes (Main site related):- 
+
 [TAL-IR] - Reporting issues
+
 [TAL-MS] - Sending suggestions
+
 [TAL-CRD] - Code related doubts
+
 [TAL-D] - Other doubts
 
 Example email subject - [TAL-MS] Suggestion to include Dark mode.
