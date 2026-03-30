@@ -1,0 +1,23 @@
+@use "../utils/Variables.scss";
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+
+  .first-look-container {
+    width: 100%;
+    height: 80%;
+    background-color: Variables.$primary-color;
+    border-radius: 10px;
+    //box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+}
