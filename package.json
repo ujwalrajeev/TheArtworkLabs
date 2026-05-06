@@ -10,12 +10,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@gravity-ui/uikit": "^7.38.0",
+    "@heroui/react": "^3.0.3",
+    "@heroui/styles": "^3.0.3",
+    "@react-oauth/google": "^0.13.4",
+    "@tailwindcss/vite": "^4.2.4",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "react-router-dom": "^7.13.2"
+    "react-router-dom": "^7.13.2",
+    "tailwindcss": "^4.2.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
+    "@gravity-ui/icons": "^2.18.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^8.57.2",

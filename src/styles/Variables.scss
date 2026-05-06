@@ -1,0 +1,24 @@
+// ------------------------------Colours-----------------------------
+:root {
+  --color-primary: #f6f59c;
+  --color-secondary: #51500e;
+  --color-positive: #4caf50;
+  --color-negative: #f44336;
+  --color-primary-accent: #fbfbd0;
+}
+
+// -----------------------------Flex styling--------------------------
+
+@mixin item-row-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin item-column-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
