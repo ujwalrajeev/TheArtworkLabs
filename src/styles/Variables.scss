@@ -5,6 +5,9 @@
   --color-positive: #4caf50;
   --color-negative: #f44336;
   --color-primary-accent: #fbfbd0;
+  --color-secondary-accent: #9e9c45;
+  --color-text-primary: #f6f59c;
+  --color-text-secondary: #51500e;
 }
 
 // -----------------------------Flex styling--------------------------
@@ -21,4 +24,36 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+// -----------------------------Hero UI Theme--------------------------
+
+@layer components {
+  .button--primary {
+    background-color: var(--color-secondary);
+    color: white;
+  }
+
+  .button--secondary {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+  }
+
+  .button--tertiary {
+    background-color: var(--color-secondary-accent);
+    color: white;
+  }
+
+  .button--ghost {
+    background-color: transparent;
+    color: var(--color-secondary);
+  }
+
+  .description {
+    color: var(--color-secondary);
+  }
+
+  .separator--default {
+    background-color: var(--color-secondary-accent);
+  }
 }
