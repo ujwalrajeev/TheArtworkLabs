@@ -1,0 +1,35 @@
+@use "../styles/Variables.scss";
+
+.auth-modal-container {
+  @include Variables.item-column-container;
+  width: fit-content;
+  height: fit-content;
+  min-width: 85%;
+  max-width: 90%;
+  background-color: var(--color-primary);
+  border-radius: 10px;
+  color: var(--color-secondary);
+
+  .auth-modal {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+    width: 100%;
+
+    > p {
+      text-align: center;
+      text-wrap: wrap;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .auth-modal-container {
+    padding: 7% 1%;
+    gap: 20px;
+    min-width: 30%;
+  }
+}
