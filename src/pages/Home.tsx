@@ -29,8 +29,12 @@ export default function Home() {
           src="/Logo/logo_v3_2.png"
           alt="The Artwork Labs Logo"
         />
-        <span className="flex gap-3 items-center">
-          <p className="text-[var(--color-text-primary)]">Menu</p>
+        <span className="flex gap-2 items-center">
+          <div className="bg-[var(--color-primary)] w-14 flex justify-end px-[2px]">
+            <p className="text-[var(--color-text-secondary)] font-[500]">
+              Menu
+            </p>
+          </div>
           <Dropdown>
             <Dropdown.Trigger className="rounded-full">
               <Bars className="text-[var(--color-text-primary)] size-7" />
@@ -124,7 +128,7 @@ export default function Home() {
       {!openAuthModal && <div className="main-news-container"></div>}
 
       <div className="footer-container">
-        <p className="text-[var(--color-text-primary)] text-xs">
+        <p className="text-white text-xs">
           © 2026 The Artwork Labs. All rights reserved.
         </p>
       </div>

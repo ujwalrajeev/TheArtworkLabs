@@ -31,5 +31,9 @@
     padding: 7% 1%;
     gap: 20px;
     min-width: 30%;
+
+    > p {
+      font-size: 2rem;
+    }
   }
 }

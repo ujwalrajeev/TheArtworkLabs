@@ -1,8 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "tailwindcss";
 @import "@heroui/styles";
 
 :root {
-  --font-primary: "Arial", sans-serif;
+  --font-primary: "Inter", sans-serif;
 }
 
 #root {
@@ -22,7 +23,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: var(--font-primary);
+  font-family: "Inter", sans-serif !important;
   height: 100%;
 }
 
