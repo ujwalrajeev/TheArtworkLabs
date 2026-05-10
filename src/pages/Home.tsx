@@ -8,7 +8,7 @@ import {
   Person,
 } from "@gravity-ui/icons";
 import { Avatar, Dropdown, Label } from "@heroui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AuthenticationModal from "../components/AuthenticationModal";
 
 export default function Home() {
@@ -19,7 +19,20 @@ export default function Home() {
     profile_picture: "",
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [openAuthModal, setOpenAuthModal] = useState(true);
+  const [openAuthModal, setOpenAuthModal] = useState(false);
+
+  useEffect(() => {
+    // TODO: Check if user is logged in
+    const checkLoginStatus = () => {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        setUserDetails(JSON.parse(storedUser));
+        setIsLoggedIn(true);
+      }
+    };
+
+    checkLoginStatus();
+  }, []);
 
   return (
     <div className="main-container">
@@ -106,10 +119,14 @@ export default function Home() {
 
               {!isLoggedIn && (
                 <Dropdown.Menu>
-                  <Dropdown.Item id="login" textValue="Login">
+                  <Dropdown.Item
+                    id="login"
+                    textValue="Login"
+                    onClick={() => setOpenAuthModal(true)}
+                  >
                     <div className="flex w-full items-center justify-between gap-2">
                       <Label className="text-[var(--color-positive)]">
-                        Login / Sign Up
+                        Login / Sign up
                       </Label>
                       <ArrowRightToSquare className="size-3.5 text-[var(--color-positive)]" />
                     </div>

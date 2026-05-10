@@ -1,5 +1,10 @@
 import "./AuthenticationModal.scss";
-import { ArrowRightToSquare, PersonPlus } from "@gravity-ui/icons";
+import {
+  ArrowRightToSquare,
+  PersonPlus,
+  Envelope,
+  Xmark,
+} from "@gravity-ui/icons";
 import {
   Button,
   Description,
@@ -10,8 +15,14 @@ import {
   TextField,
   Separator,
   ErrorMessage,
+  CloseButton,
 } from "@heroui/react";
-import { signUp, login } from "../services/firebase-auth";
+import {
+  signUp,
+  login,
+  signInWithGoogle,
+  forgotPassword,
+} from "../services/firebase-auth";
 import { useState } from "react";
 
 type AuthenticationModalProps = {
@@ -21,16 +32,25 @@ type AuthenticationModalProps = {
 export default function AuthenticationModal({
   setOpenAuthModal,
 }: AuthenticationModalProps) {
-  type AuthType = "signup" | "login" | "signedup" | "loggedin";
+  type AuthType =
+    | "signup"
+    | "login"
+    | "signedup"
+    | "loggedin"
+    | "forgotpassword"
+    | "passwordsent";
 
-  const [type, setType] = useState<AuthType>("signup");
+  const [type, setType] = useState<AuthType>("login");
   const titles: Record<AuthType, string> = {
     signup: "Sign Up",
     login: "Log In",
     signedup: "Your account has been created!",
     loggedin: "Logged In  Successfully",
+    forgotpassword: "Forgot Password",
+    passwordsent: "Forgot Password",
   };
 
+  const [fullName, setFullName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loginError, setLoginError] = useState<string>("");
@@ -40,9 +60,9 @@ export default function AuthenticationModal({
     if (email !== "" && password !== "") {
       setLoginError("");
       try {
-        await signUp(email, password);
-        setOpenAuthModal(false);
+        const userCredential = await signUp(email, password);
         setType("signedup");
+        console.log("Signup successful:", userCredential); //TODO: Store this
       } catch (err) {
         console.log(err);
       }
@@ -52,9 +72,10 @@ export default function AuthenticationModal({
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await login(email, password);
+      const userCredential = await login(email, password);
       setOpenAuthModal(false);
       setType("loggedin");
+      console.log("Login successful:", userCredential.user); //TODO: Store this
     } catch (err: unknown) {
       if (err instanceof Error) {
         if (err.message.includes("auth/invalid-credential")) {
@@ -64,14 +85,39 @@ export default function AuthenticationModal({
     }
   };
 
+  const handleSignInWithGoogle = async () => {
+    try {
+      const userCredential = await signInWithGoogle();
+      setOpenAuthModal(false);
+      setType("loggedin");
+      console.log("Google Sign-In successful:", userCredential.user); //TODO: Store this
+    } catch (err) {
+      console.error("Error signing in with Google:", err);
+    }
+  };
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await forgotPassword(email);
+      setType("passwordsent");
+    } catch (err) {
+      console.error("Error sending password reset email:", err);
+    }
+  };
+
   return (
     <div
       className={
         type === "signup"
-          ? "auth-modal-container py-12"
-          : "auth-modal-container px-8 py-12"
+          ? "auth-modal-container py-12 relative"
+          : "auth-modal-container px-8 py-12 relative"
       }
     >
+      <CloseButton
+        onClick={() => setOpenAuthModal(false)}
+        className="absolute top-4 right-4 text-white bg-[var(--color-secondary-accent)] hover:bg-[var(--color-secondary)]"
+      />
       <p
         className={
           "font-bold text-wrap" +
@@ -81,7 +127,7 @@ export default function AuthenticationModal({
         {titles[type]}
       </p>
 
-      {/* ---------------------------Signup Form --------------------------- */}
+      {/* --------------------------- Signup Form --------------------------- */}
 
       {type === "signup" && (
         <div className="auth-modal">
@@ -90,6 +136,23 @@ export default function AuthenticationModal({
             render={(props) => <form {...props} data-custom="foo" />}
             onSubmit={handleSignup}
           >
+            <TextField
+              isRequired
+              name="fullname"
+              type="text"
+              validate={(value) => {
+                if (value.trim() === "") {
+                  return "Please enter your full name";
+                }
+                return null;
+              }}
+              onChange={(e) => setFullName(e)}
+            >
+              <Label>Full Name</Label>
+              <Input placeholder="Enter your full name" />
+              <FieldError />
+            </TextField>
+
             <TextField
               isRequired
               name="email"
@@ -132,16 +195,29 @@ export default function AuthenticationModal({
               </Description>
               <FieldError />
             </TextField>
-            <div className="flex gap-2">
+            <div className="flex gap-2 items-center justify-center mt-5">
               <Button type="submit" variant="primary">
                 <PersonPlus />
                 Sign Up
+              </Button>
+              <p>or</p>
+              <Button variant="outline" onClick={handleSignInWithGoogle}>
+                <img
+                  src="/Icons/google.png"
+                  alt="Google Logo"
+                  className="size-4"
+                />
+                <p className="text-[var(--color-text-secondary)]">
+                  Sign up with Google
+                </p>
               </Button>
             </div>
           </Form>
           <Separator />
           <div className="flex items-center gap-3 justify-center">
-            <p>Already have an account?</p>
+            <p className="text-[var(--color-text-secondary)]">
+              Already have an account?
+            </p>
             <Button variant="primary" onClick={() => setType("login")}>
               Log In
             </Button>
@@ -149,7 +225,7 @@ export default function AuthenticationModal({
         </div>
       )}
 
-      {/* ---------------------------Login Form --------------------------- */}
+      {/* --------------------------- Login Form --------------------------- */}
 
       {type === "login" && (
         <div className="auth-modal">
@@ -185,15 +261,34 @@ export default function AuthenticationModal({
               <Input placeholder="Enter your password" />
               <FieldError />
             </TextField>
-            <div className="flex gap-2">
+            <div className="flex gap-3 items-center justify-center mt-5">
               <Button type="submit" variant="primary">
                 <ArrowRightToSquare />
                 Login
               </Button>
-              <Button variant="tertiary">Forgot Password?</Button>
+              <p>or</p>
+              <Button variant="outline" onClick={handleSignInWithGoogle}>
+                <img
+                  src="/Icons/google.png"
+                  alt="Google Logo"
+                  className="size-4"
+                />
+                <p className="text-[var(--color-text-secondary)]">
+                  Sign in with Google
+                </p>
+              </Button>
+            </div>
+            <div className="flex flex-col items-center">
+              <Button
+                variant="ghost"
+                className={"underline underline-offset-4"}
+                onClick={() => setType("forgotpassword")}
+              >
+                Forgot Password?
+              </Button>
             </div>
           </Form>
-          <ErrorMessage>{loginError}</ErrorMessage>
+          {loginError && <ErrorMessage>{loginError}</ErrorMessage>}
           <Separator />
           <div className="flex items-center gap-3 justify-center">
             <p>Not registered yet?</p>
@@ -204,7 +299,7 @@ export default function AuthenticationModal({
         </div>
       )}
 
-      {/* ---------------------------Post Signup Message --------------------------- */}
+      {/* --------------------------- Post Signup Message --------------------------- */}
 
       {type === "signedup" && (
         <div className="auth-modal w-full justify-center items-center text-center gap-5">
@@ -218,11 +313,72 @@ export default function AuthenticationModal({
         </div>
       )}
 
-      {/* ---------------------------Post Login Message --------------------------- */}
+      {/* --------------------------- Post Login Message --------------------------- */}
 
       {type === "loggedin" && (
         <div className="auth-modal w-full justify-center items-center text-center gap-5">
           <p>You have successfully logged in!</p>
+          <Button variant="primary" onClick={() => setOpenAuthModal(false)}>
+            Close
+          </Button>
+        </div>
+      )}
+
+      {/* --------------------------- Forgot Password Form --------------------------- */}
+
+      {type === "forgotpassword" && (
+        <div className="auth-modal">
+          <p className="text-center">
+            To reset your password, please enter your email address and we'll
+            send you instructions.
+          </p>
+          <Form
+            className="flex flex-col gap-5"
+            render={(props) => <form {...props} data-custom="foo" />}
+            onSubmit={handleForgotPassword}
+          >
+            <TextField
+              isRequired
+              name="email"
+              type="email"
+              validate={(value) => {
+                if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
+                  return "Please enter a valid email address";
+                }
+                return null;
+              }}
+              onChange={(e) => setEmail(e)}
+            >
+              <Label>Email</Label>
+              <Input placeholder="john@example.com" />
+              <FieldError />
+            </TextField>
+            <div className="flex gap-3 items-center justify-center mt-5">
+              <Button type="submit" variant="primary">
+                <Envelope />
+                Send Reset Link
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setType("login")}
+              >
+                <Xmark />
+                Cancel
+              </Button>
+            </div>
+          </Form>
+        </div>
+      )}
+
+      {/* --------------------------- Post Forgot Password Message --------------------------- */}
+
+      {type === "passwordsent" && (
+        <div className="auth-modal w-full justify-center items-center text-center gap-5">
+          <p>
+            A password reset email has been sent to your inbox if you are a
+            registered user.
+          </p>
           <Button variant="primary" onClick={() => setOpenAuthModal(false)}>
             Close
           </Button>
