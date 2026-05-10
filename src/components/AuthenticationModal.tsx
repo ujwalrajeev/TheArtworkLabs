@@ -72,7 +72,14 @@ export default function AuthenticationModal({
           : "auth-modal-container px-8 py-12"
       }
     >
-      <p className="text-xl font-bold">{titles[type]}</p>
+      <p
+        className={
+          "font-bold text-wrap" +
+          (type === "signup" || type === "login" ? " text-3xl" : " text-xl")
+        }
+      >
+        {titles[type]}
+      </p>
 
       {/* ---------------------------Signup Form --------------------------- */}
 
