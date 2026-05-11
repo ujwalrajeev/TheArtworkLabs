@@ -46,15 +46,59 @@
 
   .main-news-container {
     @include Variables.item-column-container;
-    width: 80%;
-    height: auto;
-    aspect-ratio: 99 / 60;
+    display: flex;
+    flex-direction: row;
+    width: 86%;
+    min-height: 30%;
+    aspect-ratio: 1.5/1;
+    height: fit-content;
     background-color: var(--color-primary);
-    background-image: url("../../public/Background/postcard_background.jpg");
+    //background-image: url("../../public/Background/postcard_background.jpg");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    //border-radius: 0.9rem;
     box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.5);
+    padding: 20px 12px 20px 6px;
+
+    .mnc-left {
+      @include Variables.item-column-container;
+      width: 50%;
+      height: 100%;
+      border-right: 1px dotted var(--color-secondary);
+      padding: 0px 10px;
+
+      .dear-you-main-text {
+        font-size: 1.4rem;
+        font-weight: 300;
+      }
+
+      .dear-you-tagline {
+        font-size: 0.9rem;
+        text-wrap: wrap;
+        text-align: center;
+        font-weight: 200;
+      }
+
+      @media (min-width: 768px) {
+        .dear-you-tagline {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .mnc-right {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .stamp-box {
+        width: 3.5rem;
+        height: 4rem;
+        border: 1px dotted var(--color-secondary-accent);
+      }
+    }
   }
 
   @media (min-width: 768px) {

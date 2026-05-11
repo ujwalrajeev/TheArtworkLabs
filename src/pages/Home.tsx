@@ -3,13 +3,15 @@ import {
   ArrowRightFromSquare,
   ArrowRightToSquare,
   Bars,
-  Gear,
   Persons,
   Person,
+  PersonWorker,
+  Folders,
 } from "@gravity-ui/icons";
-import { Avatar, Dropdown, Label } from "@heroui/react";
+import { Avatar, Dropdown, Label, Separator } from "@heroui/react";
 import { useEffect, useState } from "react";
 import AuthenticationModal from "../components/AuthenticationModal";
+import { logout } from "../services/firebase-auth";
 
 export default function Home() {
   const [userDetails, setUserDetails] = useState({
@@ -18,8 +20,17 @@ export default function Home() {
     email: "ujwalrajeev@theartworklabs.com",
     profile_picture: "",
   });
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [openAuthModal, setOpenAuthModal] = useState(false);
+
+  const signOut = async () => {
+    try {
+      await logout();
+      setIsLoggedIn(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     // TODO: Check if user is logged in
@@ -36,6 +47,8 @@ export default function Home() {
 
   return (
     <div className="main-container">
+      {/*--------------------------- Header Section ---------------------------*/}
+
       <div className="header-container">
         <img
           className="first-look-logo"
@@ -60,10 +73,7 @@ export default function Home() {
                       alt="Profile Picture"
                       src={userDetails.profile_picture}
                     />
-                    <Avatar.Fallback
-                      delayMs={600}
-                      className="bg-[var(--color-primary)]"
-                    >
+                    <Avatar.Fallback className="bg-[var(--color-primary)]">
                       <Person />
                     </Avatar.Fallback>
                   </Avatar>
@@ -82,32 +92,37 @@ export default function Home() {
               </div>
               {isLoggedIn && (
                 <Dropdown.Menu>
-                  <Dropdown.Item
-                    id="dashboard"
-                    textValue="Dashboard"
-                    className="hover:bg-[var(--color-primary)]"
-                  >
-                    <Label>Dashboard</Label>
-                  </Dropdown.Item>
                   <Dropdown.Item id="profile" textValue="Profile">
-                    <Label>Profile</Label>
-                  </Dropdown.Item>
-                  <Dropdown.Item id="settings" textValue="Settings">
                     <div className="flex w-full items-center justify-between gap-2">
-                      <Label>Settings</Label>
-                      <Gear className="size-3.5 text-muted" />
+                      <Label>Profile</Label>
+                      <Person className="size-3.5 text-muted" />
                     </div>
                   </Dropdown.Item>
-                  <Dropdown.Item id="new-project" textValue="New project">
+                  <Dropdown.Item id="about" textValue="about">
                     <div className="flex w-full items-center justify-between gap-2">
-                      <Label>Create Team</Label>
+                      <Label>About Us</Label>
                       <Persons className="size-3.5 text-muted" />
                     </div>
                   </Dropdown.Item>
+                  <Dropdown.Item id="portfolio" textValue="portfolio">
+                    <div className="flex w-full items-center justify-between gap-2">
+                      <Label>Portfolio</Label>
+                      <Folders className="size-3.5 text-muted" />
+                    </div>
+                  </Dropdown.Item>
+                  <Dropdown.Item id="help" textValue="help">
+                    <div className="flex w-full items-center justify-between gap-2">
+                      <Label>Help</Label>
+                      <PersonWorker className="size-3.5 text-muted" />
+                    </div>
+                  </Dropdown.Item>
+                  <Separator className="opacity-50" />
                   <Dropdown.Item
                     id="logout"
                     textValue="Logout"
                     variant="danger"
+                    className="hover:bg-red-100"
+                    onClick={signOut}
                   >
                     <div className="flex w-full items-center justify-between gap-2">
                       <Label>Log Out</Label>
@@ -138,11 +153,36 @@ export default function Home() {
         </span>
       </div>
 
+      {/*--------------------------- Authentication Section ---------------------------*/}
+
       {openAuthModal && (
         <AuthenticationModal setOpenAuthModal={setOpenAuthModal} />
       )}
 
-      {!openAuthModal && <div className="main-news-container"></div>}
+      {/*--------------------------- Main News Section ---------------------------*/}
+
+      {!openAuthModal && (
+        <div className="main-news-container">
+          <div className="mnc-left">
+            <p className="dear-you-main-text">Dear You.</p>
+            <p className="dear-you-tagline">Personalised letters send to you</p>
+          </div>
+
+          <div className="mnc-right pl-3">
+            <div className="flex justify-end">
+              <div className="stamp-box"></div>
+            </div>
+            <div className="flex flex-col divide-dashed divide-[var(--color-secondary-accent)] divide-y-1">
+              <div className="w-full h-12"></div>
+              <div className="w-full h-12"></div>
+              <div className="w-full h-12"></div>
+              <div className="w-full h-12"></div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/*--------------------------- Footer Section ---------------------------*/}
 
       <div className="footer-container">
         <p className="text-white text-xs">
