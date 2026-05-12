@@ -6,6 +6,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   sendPasswordResetEmail,
+  updateProfile,
 } from "firebase/auth";
 
 import { auth } from "../config/firebase-config";
@@ -36,4 +37,15 @@ export const signInWithGoogle = async () => {
 
 export const forgotPassword = async (email: string) => {
   return await sendPasswordResetEmail(auth, email);
+};
+
+export const updateUserProfile = async (data: {
+  displayName?: string;
+  photoURL?: string;
+}) => {
+  if (auth.currentUser) {
+    await updateProfile(auth.currentUser, data);
+  } else {
+    throw new Error("No user is currently signed in.");
+  }
 };

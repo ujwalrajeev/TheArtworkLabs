@@ -22,8 +22,10 @@ import {
   login,
   signInWithGoogle,
   forgotPassword,
+  updateUserProfile,
 } from "../services/firebase-auth";
 import { useState } from "react";
+import { useAuthStore } from "../utils/state-machine";
 
 type AuthenticationModalProps = {
   setOpenAuthModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -61,8 +63,9 @@ export default function AuthenticationModal({
       setLoginError("");
       try {
         const userCredential = await signUp(email, password);
+        await updateUserProfile({ displayName: fullName });
         setType("signedup");
-        console.log("Signup successful:", userCredential); //TODO: Store this
+        useAuthStore.getState().setUser(userCredential.user);
       } catch (err) {
         console.log(err);
       }
@@ -74,8 +77,9 @@ export default function AuthenticationModal({
     try {
       const userCredential = await login(email, password);
       setOpenAuthModal(false);
+      useAuthStore.getState().setIsLoggedIn(true);
+      useAuthStore.getState().setUser(userCredential.user);
       setType("loggedin");
-      console.log("Login successful:", userCredential.user); //TODO: Store this
     } catch (err: unknown) {
       if (err instanceof Error) {
         if (err.message.includes("auth/invalid-credential")) {
@@ -90,7 +94,8 @@ export default function AuthenticationModal({
       const userCredential = await signInWithGoogle();
       setOpenAuthModal(false);
       setType("loggedin");
-      console.log("Google Sign-In successful:", userCredential.user); //TODO: Store this
+      useAuthStore.getState().setIsLoggedIn(true);
+      useAuthStore.getState().setUser(userCredential.user);
     } catch (err) {
       console.error("Error signing in with Google:", err);
     }

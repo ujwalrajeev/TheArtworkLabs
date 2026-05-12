@@ -8,41 +8,48 @@ import {
   PersonWorker,
   Folders,
 } from "@gravity-ui/icons";
-import { Avatar, Dropdown, Label, Separator } from "@heroui/react";
+import { Avatar, Button, Dropdown, Label, Separator } from "@heroui/react";
 import { useEffect, useState } from "react";
 import AuthenticationModal from "../components/AuthenticationModal";
 import { logout } from "../services/firebase-auth";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../config/firebase-config";
+import { useAuthStore } from "../utils/state-machine";
 
 export default function Home() {
   const [userDetails, setUserDetails] = useState({
     id: "taluser1",
     name: "Ujwal Rajeev",
     email: "ujwalrajeev@theartworklabs.com",
-    profile_picture: "",
+    photoURL: "",
   });
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
   const [openAuthModal, setOpenAuthModal] = useState(false);
 
   const signOut = async () => {
     try {
       await logout();
-      setIsLoggedIn(false);
+      useAuthStore.getState().setIsLoggedIn(false);
     } catch (err) {
       console.log(err);
     }
   };
 
   useEffect(() => {
-    // TODO: Check if user is logged in
-    const checkLoginStatus = () => {
-      const storedUser = localStorage.getItem("user");
-      if (storedUser) {
-        setUserDetails(JSON.parse(storedUser));
-        setIsLoggedIn(true);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserDetails({
+          id: user.uid,
+          name: user.displayName || "No Name",
+          email: user.email || "",
+          photoURL: user.photoURL || "",
+        });
+        useAuthStore.getState().setIsLoggedIn(true);
+      } else {
+        useAuthStore.getState().setIsLoggedIn(false);
       }
-    };
-
-    checkLoginStatus();
+    });
+    return () => unsubscribe();
   }, []);
 
   return (
@@ -71,7 +78,7 @@ export default function Home() {
                   <Avatar size="sm">
                     <Avatar.Image
                       alt="Profile Picture"
-                      src={userDetails.profile_picture}
+                      src={userDetails.photoURL}
                     />
                     <Avatar.Fallback className="bg-[var(--color-primary)]">
                       <Person />
@@ -165,18 +172,40 @@ export default function Home() {
         <div className="main-news-container">
           <div className="mnc-left">
             <p className="dear-you-main-text">Dear You.</p>
-            <p className="dear-you-tagline">Personalised letters send to you</p>
+            <p className="dear-you-tagline">
+              “Connecting hearts through meaningful communication.”
+            </p>
+            <Button variant="primary" className="mt-4">
+              Know More
+            </Button>
           </div>
 
           <div className="mnc-right pl-3">
             <div className="flex justify-end">
-              <div className="stamp-box"></div>
+              <div className="stamp-box">
+                <img
+                  src="/Design-elements/monkey_tree.png"
+                  alt="Stamp Icon"
+                  className="stamp-image"
+                />
+              </div>
             </div>
             <div className="flex flex-col divide-dashed divide-[var(--color-secondary-accent)] divide-y-1">
               <div className="w-full h-12"></div>
-              <div className="w-full h-12"></div>
-              <div className="w-full h-12"></div>
-              <div className="w-full h-12"></div>
+              <div className="w-full h-fit">
+                <p className="dear-you-description">
+                  "Dear You." delivers thoughtful, personalised letters written
+                  by real people.
+                </p>
+              </div>
+              <div className="w-full h-fit">
+                <p className="dear-you-description">
+                  For those who miss the feeling of opening something
+                  meaningful. In a world full of notifications, we bring back
+                  the quiet excitement of receiving a letter made just for you.
+                </p>
+              </div>
+              <div></div>
             </div>
           </div>
         </div>

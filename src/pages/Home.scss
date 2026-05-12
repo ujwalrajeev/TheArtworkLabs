@@ -10,8 +10,8 @@
   //align-items: center;
   justify-content: space-between;
   background-image:
-    //linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-    url("../../public/Background/green_leaves.jpg");
+    linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)),
+    url("/Background/green_leaves.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -48,9 +48,10 @@
     @include Variables.item-column-container;
     display: flex;
     flex-direction: row;
-    width: 86%;
+    width: auto;
+    max-width: 92%;
     min-height: 30%;
-    aspect-ratio: 1.5/1;
+    //aspect-ratio: 1.5/1;
     height: fit-content;
     background-color: var(--color-primary);
     //background-image: url("../../public/Background/postcard_background.jpg");
@@ -69,8 +70,9 @@
       padding: 0px 10px;
 
       .dear-you-main-text {
-        font-size: 1.4rem;
+        font-size: 2rem;
         font-weight: 300;
+        font-family: var(--font-dear-you);
       }
 
       .dear-you-tagline {
@@ -89,7 +91,7 @@
 
     .mnc-right {
       width: 50%;
-      height: 100%;
+      height: fit-content;
       display: flex;
       flex-direction: column;
 
@@ -97,6 +99,29 @@
         width: 3.5rem;
         height: 4rem;
         border: 1px dotted var(--color-secondary-accent);
+        position: relative;
+      }
+
+      .stamp-image {
+        position: absolute;
+        width: 7rem;
+        height: auto;
+        max-width: none;
+        right: -40%;
+        top: -23%;
+      }
+
+      .dear-you-description {
+        font-size: 0.7rem;
+        text-wrap: wrap;
+        font-weight: 200;
+        padding: 5px 0px;
+      }
+
+      @media (min-width: 768px) {
+        .dear-you-description {
+          font-size: 0.9rem;
+        }
       }
     }
   }
@@ -104,6 +129,8 @@
   @media (min-width: 768px) {
     .main-news-container {
       width: 35%;
+      padding-top: 3%;
+      padding-bottom: 3%;
     }
   }
 
