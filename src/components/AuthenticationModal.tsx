@@ -23,6 +23,7 @@ import {
   signInWithGoogle,
   forgotPassword,
   updateUserProfile,
+  logout,
 } from "../services/firebase-auth";
 import { useState } from "react";
 import { useAuthStore } from "../utils/state-machine";
@@ -40,9 +41,10 @@ export default function AuthenticationModal({
     | "signedup"
     | "loggedin"
     | "forgotpassword"
-    | "passwordsent";
+    | "passwordsent"
+    | "emailnotverified";
 
-  const [type, setType] = useState<AuthType>("login");
+  const [type, setType] = useState<AuthType>("signup");
   const titles: Record<AuthType, string> = {
     signup: "Sign Up",
     login: "Log In",
@@ -50,6 +52,7 @@ export default function AuthenticationModal({
     loggedin: "Logged In  Successfully",
     forgotpassword: "Forgot Password",
     passwordsent: "Forgot Password",
+    emailnotverified: "Email Not Verified",
   };
 
   const [fullName, setFullName] = useState<string>("");
@@ -66,6 +69,7 @@ export default function AuthenticationModal({
         await updateUserProfile({ displayName: fullName });
         setType("signedup");
         useAuthStore.getState().setUser(userCredential.user);
+        logout();
       } catch (err) {
         console.log(err);
       }
@@ -76,6 +80,11 @@ export default function AuthenticationModal({
     e.preventDefault();
     try {
       const userCredential = await login(email, password);
+      if (!userCredential.user.emailVerified) {
+        setType("emailnotverified");
+        logout();
+        return;
+      }
       setOpenAuthModal(false);
       useAuthStore.getState().setIsLoggedIn(true);
       useAuthStore.getState().setUser(userCredential.user);
@@ -194,10 +203,26 @@ export default function AuthenticationModal({
               onChange={(e) => setPassword(e)}
             >
               <Label>Password</Label>
-              <Input placeholder="Enter your password" />
+              <Input placeholder="Choose your password" />
               <Description>
                 Must be at least 8 characters with 1 uppercase and 1 number
               </Description>
+              <FieldError />
+            </TextField>
+            <TextField
+              isRequired
+              minLength={8}
+              name="confirmPassword"
+              type="password"
+              validate={(value) => {
+                if (value !== password) {
+                  return "Passwords do not match";
+                }
+                return null;
+              }}
+            >
+              <Label>Confirm Password</Label>
+              <Input placeholder="Confirm your password" />
               <FieldError />
             </TextField>
             <div className="flex gap-2 items-center justify-center mt-5">
@@ -309,12 +334,18 @@ export default function AuthenticationModal({
       {type === "signedup" && (
         <div className="auth-modal w-full justify-center items-center text-center gap-5">
           <p>
-            Verication email has been sent to your inbox. Please verify your
-            email
+            Verification email has been sent to your inbox. Please verify your
+            email to login to your account.
           </p>
-          <Button variant="primary" onClick={() => setOpenAuthModal(false)}>
-            Close
-          </Button>
+          <div className="flex gap-3">
+            <Button variant="primary" onClick={() => setType("login")}>
+              Login
+            </Button>
+            <Button variant="outline" onClick={() => setOpenAuthModal(false)}>
+              Need help?
+            </Button>{" "}
+            {/* FIXME: Go to support page */}
+          </div>
         </div>
       )}
 
@@ -326,6 +357,27 @@ export default function AuthenticationModal({
           <Button variant="primary" onClick={() => setOpenAuthModal(false)}>
             Close
           </Button>
+        </div>
+      )}
+
+      {/* --------------------------- Email Not Verified Message --------------------------- */}
+
+      {type === "emailnotverified" && (
+        <div className="auth-modal w-full justify-center items-center text-center gap-5">
+          <p>
+            Your email is not verified. Please check your inbox for a
+            verification email. Login again after verifying your email to access
+            your account.
+          </p>
+          <div className="flex gap-3">
+            <Button variant="primary" onClick={() => setType("login")}>
+              Login
+            </Button>
+            <Button variant="outline" onClick={() => setType("login")}>
+              Need help?
+            </Button>
+            {/* FIXME: Go to support page */}
+          </div>
         </div>
       )}
 

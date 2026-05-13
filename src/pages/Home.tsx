@@ -56,7 +56,7 @@ export default function Home() {
     <div className="main-container">
       {/*--------------------------- Header Section ---------------------------*/}
 
-      <div className="header-container">
+      <header className="header-container">
         <img
           className="first-look-logo"
           src="/Logo/logo_v3_2.png"
@@ -158,7 +158,7 @@ export default function Home() {
             </Dropdown.Popover>
           </Dropdown>
         </span>
-      </div>
+      </header>
 
       {/*--------------------------- Authentication Section ---------------------------*/}
 
@@ -166,58 +166,61 @@ export default function Home() {
         <AuthenticationModal setOpenAuthModal={setOpenAuthModal} />
       )}
 
-      {/*--------------------------- Main News Section ---------------------------*/}
+      {/*--------------------------- Main Content Section ---------------------------*/}
+      <main className="main-content-container">
+        {!openAuthModal && (
+          <section className="main-news-container">
+            <div className="mnc-left">
+              <h1 className="dear-you-main-text">Dear You.</h1>
+              <p className="dear-you-tagline">
+                “Bringing back the feeling of receiving something truly
+                personal.”
+              </p>
+              <Button variant="primary" className="mt-4 ">
+                Experience It Now
+              </Button>
+            </div>
 
-      {!openAuthModal && (
-        <div className="main-news-container">
-          <div className="mnc-left">
-            <p className="dear-you-main-text">Dear You.</p>
-            <p className="dear-you-tagline">
-              “Connecting hearts through meaningful communication.”
-            </p>
-            <Button variant="primary" className="mt-4">
-              Know More
-            </Button>
-          </div>
-
-          <div className="mnc-right pl-3">
-            <div className="flex justify-end">
-              <div className="stamp-box">
-                <img
-                  src="/Design-elements/monkey_tree.png"
-                  alt="Stamp Icon"
-                  className="stamp-image"
-                />
+            <div className="mnc-right pl-3">
+              <div className="flex justify-end">
+                <div className="stamp-box">
+                  <img
+                    src="/Design-elements/monkey_tree.png"
+                    alt="Stamp Icon"
+                    className="stamp-image"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col divide-dashed divide-[var(--color-secondary-accent)] divide-y-1">
+                <div className="w-full h-12"></div>
+                <div className="w-full h-fit">
+                  <h2 className="dear-you-description">
+                    "Dear You." delivers thoughtful, personalised letters
+                    written by real people.
+                  </h2>
+                </div>
+                <div className="w-full h-fit">
+                  <p className="dear-you-description">
+                    For those who miss the feeling of opening something
+                    meaningful. In a world full of notifications, we bring back
+                    the quiet excitement of receiving a letter made just for
+                    you.
+                  </p>
+                </div>
+                <div></div>
               </div>
             </div>
-            <div className="flex flex-col divide-dashed divide-[var(--color-secondary-accent)] divide-y-1">
-              <div className="w-full h-12"></div>
-              <div className="w-full h-fit">
-                <p className="dear-you-description">
-                  "Dear You." delivers thoughtful, personalised letters written
-                  by real people.
-                </p>
-              </div>
-              <div className="w-full h-fit">
-                <p className="dear-you-description">
-                  For those who miss the feeling of opening something
-                  meaningful. In a world full of notifications, we bring back
-                  the quiet excitement of receiving a letter made just for you.
-                </p>
-              </div>
-              <div></div>
-            </div>
-          </div>
-        </div>
-      )}
+          </section>
+        )}
+      </main>
 
       {/*--------------------------- Footer Section ---------------------------*/}
 
-      <div className="footer-container">
+      <footer className="footer-container">
         <p className="text-white text-xs">
           © 2026 The Artwork Labs. All rights reserved.
         </p>
-      </div>
+      </footer>
     </div>
   );
 }
