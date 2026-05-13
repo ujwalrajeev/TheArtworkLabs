@@ -3,14 +3,13 @@ www.theartworklabs.com
 
 ## About
 Hi this is the official Github repo for The Artwork Labs website.
-Creator - Ujwal Rajeev
+
+Created by Ujwal Rajeev.
 
 Frontend - ReactJS, JavaScript, HTML, CSS(SaSS/ScSS), TypeScript
+
 Backend - Python Django, Firebase
 Hosting - Vercel
-
-## License
-This is open source so that anyone can use the code, modify it and publish under the same open source license.
 
 ## Contact
 Feel free to contact us for any suggestions, issues or anything through our email. Please use the code below in the starting of the subject in the email while sending your email, so that we dont miss it and also to prevent spam.
@@ -31,3 +30,6 @@ Example email subject - [TAL-MS] Suggestion to include Dark mode.
 
 ## Contributors
 Thank you so much for these wonderful people who has helped in building The Artwork Labs.
+
+## License
+This is open source so that anyone can use the code, modify it and publish under the same open source license.
