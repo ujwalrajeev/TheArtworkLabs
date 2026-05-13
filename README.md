@@ -5,9 +5,9 @@ www.theartworklabs.com
 Hi this is the official Github repo for The Artwork Labs website.
 Creator - Ujwal Rajeev
 
-Frontend - ReactJS, JavaScript, HTML, CSS(SaSS/ScSS), Python
-Backend - Python Django
-Hosting -  
+Frontend - ReactJS, JavaScript, HTML, CSS(SaSS/ScSS), TypeScript
+Backend - Python Django, Firebase
+Hosting - Vercel
 
 ## License
 This is open source so that anyone can use the code, modify it and publish under the same open source license.
