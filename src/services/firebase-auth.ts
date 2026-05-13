@@ -49,3 +49,8 @@ export const updateUserProfile = async (data: {
     throw new Error("No user is currently signed in.");
   }
 };
+
+export const isVerified = () => {
+  const user = auth.currentUser;
+  return user ? user.emailVerified : false;
+};

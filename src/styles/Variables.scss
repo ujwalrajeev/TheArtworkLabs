@@ -79,4 +79,10 @@
   .separator--default {
     background-color: var(--color-secondary-accent);
   }
+
+  .menu-item {
+    &:hover {
+      background-color: var(--color-primary-accent);
+    }
+  }
 }

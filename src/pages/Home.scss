@@ -44,6 +44,12 @@
     }
   }
 
+  .main-content-container {
+    @include Variables.item-column-container;
+    width: 100%;
+    height: fit-content;
+  }
+
   .main-news-container {
     @include Variables.item-column-container;
     display: flex;
@@ -137,13 +143,5 @@
   .footer-container {
     @include Variables.item-row-container;
     width: 100%;
-  }
-}
-
-@layer components {
-  .menu-item {
-    &:hover {
-      background-color: var(--color-primary-accent);
-    }
   }
 }
