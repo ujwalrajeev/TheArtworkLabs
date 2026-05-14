@@ -1,147 +1,83 @@
 @use "../styles/Variables.scss";
 
-.main-container {
-  @include Variables.item-column-container;
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  //align-items: center;
-  justify-content: space-between;
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)),
-    url("/Background/green_leaves.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  gap: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+.main-news-container {
+  @include Variables.item-row-container;
+  width: auto;
+  max-width: 92%;
+  min-height: 30%;
+  height: fit-content;
+  background-color: var(--color-primary);
+  box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.5);
+  padding: 20px 12px 20px 6px;
 
-  .header-container {
-    @include Variables.item-row-container;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 1rem;
-    z-index: 10;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    height: 10%;
+  .mnc-left {
+    @include Variables.item-column-container;
+    width: 50%;
+    height: 100%;
+    border-right: 1px dotted var(--color-secondary);
+    padding: 0px 10px;
 
-    .first-look-logo {
-      width: 6rem;
-      height: auto;
-      transition: transform 0.3s ease-in-out;
-
-      &:hover {
-        transform: scale(1.05);
-      }
+    .dear-you-main-text {
+      font-size: 2rem;
+      font-weight: 300;
+      font-family: var(--font-dear-you);
     }
-  }
 
-  .main-content-container {
-    @include Variables.item-column-container;
-    width: 100%;
-    height: fit-content;
-  }
+    .dear-you-tagline {
+      font-size: 0.9rem;
+      text-wrap: wrap;
+      text-align: center;
+      font-weight: 200;
+    }
 
-  .main-news-container {
-    @include Variables.item-column-container;
-    display: flex;
-    flex-direction: row;
-    width: auto;
-    max-width: 92%;
-    min-height: 30%;
-    //aspect-ratio: 1.5/1;
-    height: fit-content;
-    background-color: var(--color-primary);
-    //background-image: url("../../public/Background/postcard_background.jpg");
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    //border-radius: 0.9rem;
-    box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.5);
-    padding: 20px 12px 20px 6px;
-
-    .mnc-left {
-      @include Variables.item-column-container;
-      width: 50%;
-      height: 100%;
-      border-right: 1px dotted var(--color-secondary);
-      padding: 0px 10px;
-
-      .dear-you-main-text {
-        font-size: 2rem;
-        font-weight: 300;
-        font-family: var(--font-dear-you);
-      }
-
+    @media (min-width: 768px) {
       .dear-you-tagline {
-        font-size: 0.9rem;
-        text-wrap: wrap;
-        text-align: center;
-        font-weight: 200;
-      }
-
-      @media (min-width: 768px) {
-        .dear-you-tagline {
-          font-size: 1rem;
-        }
+        font-size: 1rem;
       }
     }
+  }
 
-    .mnc-right {
-      width: 50%;
-      height: fit-content;
-      display: flex;
-      flex-direction: column;
+  .mnc-right {
+    width: 50%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
 
-      .stamp-box {
-        width: 3.5rem;
-        height: 4rem;
-        border: 1px dotted var(--color-secondary-accent);
-        position: relative;
-      }
+    .stamp-box {
+      width: 3.5rem;
+      height: 4rem;
+      border: 1px dotted var(--color-secondary-accent);
+      position: relative;
+    }
 
-      .stamp-image {
-        position: absolute;
-        width: 7rem;
-        height: auto;
-        max-width: none;
-        right: -40%;
-        top: -23%;
-      }
+    .stamp-image {
+      position: absolute;
+      width: 7rem;
+      height: auto;
+      max-width: none;
+      right: -40%;
+      top: -23%;
+    }
 
+    .dear-you-description {
+      font-size: 0.7rem;
+      text-wrap: wrap;
+      font-weight: 200;
+      padding: 5px 0px;
+    }
+
+    @media (min-width: 768px) {
       .dear-you-description {
-        font-size: 0.7rem;
-        text-wrap: wrap;
-        font-weight: 200;
-        padding: 5px 0px;
-      }
-
-      @media (min-width: 768px) {
-        .dear-you-description {
-          font-size: 0.9rem;
-        }
+        font-size: 0.9rem;
       }
     }
   }
+}
 
-  @media (min-width: 768px) {
-    .main-news-container {
-      width: 35%;
-      padding-top: 3%;
-      padding-bottom: 3%;
-    }
-  }
-
-  .footer-container {
-    @include Variables.item-row-container;
-    width: 100%;
+@media (min-width: 768px) {
+  .main-news-container {
+    width: 35%;
+    padding-top: 3%;
+    padding-bottom: 3%;
   }
 }
