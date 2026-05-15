@@ -13,7 +13,13 @@
 }
 
 .dear-you-message {
-  font-family: var(--font-dear-you);
-  font-size: 1.25rem;
+  font-family: var(--font-primary);
+  font-size: 1rem;
   text-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  .dear-you-message {
+    font-size: 1.4rem;
+  }
 }

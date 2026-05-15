@@ -7,8 +7,8 @@ import { auth } from "../config/firebase-config";
 import { Button } from "@heroui/react";
 
 export default function DearYou() {
-  const [openAuthModal, setOpenAuthModal] = useState(false);
-  const [showMessage, setShowMessage] = useState(true);
+  const [openAuthModal, setOpenAuthModal] = useState<boolean>(false);
+  const [showMessage, setShowMessage] = useState<string>("about");
 
   return (
     <div className="main-container dear-you-background">
@@ -17,10 +17,11 @@ export default function DearYou() {
         <AuthenticationModal setOpenAuthModal={setOpenAuthModal} />
       )}
 
-      {showMessage && (
+      {showMessage === "intro" && (
         <main className="main-content-container px-6 text-[var(--color-text-secondary)]">
           <h1 className="dear-you-title self-start">
-            Dear {auth.currentUser?.displayName || "You"},
+            Dear {auth.currentUser?.displayName?.trim() || "You"},
+            {/* FIXME: Reloading the page causes the name to disappear */}
           </h1>
           <p className="dear-you-message self-start pt-3">
             There was a time when opening the mailbox felt exciting.
@@ -40,7 +41,7 @@ export default function DearYou() {
             feels further away than ever.
           </p>
           <p className="dear-you-message self-start pt-4">
-            <strong>“Dear You.”</strong> was born from the belief that some
+            <strong>“Dear You,”</strong> was born from the belief that some
             feelings should never become outdated.
           </p>
           <p className="dear-you-message self-start pt-4">
@@ -53,15 +54,39 @@ export default function DearYou() {
             The feeling of slowing down, even for a moment.
           </p>
           <p className="dear-you-message self-start pt-4">Yours lovingly,</p>
-          <p className="dear-you-message self-start font-bold">
+          <p className="dear-you-title self-start font-bold">
             The Artwork Labs
           </p>
           <Button
             variant="primary"
             className="mt-2 mb-4 self-start"
-            onClick={() => setShowMessage(false)}
+            onClick={() => setShowMessage("about")}
           >
             Experience Dear You,
+          </Button>
+        </main>
+      )}
+
+      {showMessage === "about" && (
+        <main className="main-content-container px-6 text-[var(--color-text-secondary)]">
+          <h1 className="dear-you-title self-start">Dear You,</h1>
+          <p className="dear-you-message self-start pt-3">
+            Dear You is a digital letter experience that brings back the joy of
+            receiving heartfelt messages. It’s a space where you can write and
+            receive letters that are meant to be cherished, not just read and
+            forgotten.
+          </p>
+          <p className="dear-you-message self-start pt-4">
+            Whether it’s a note to your future self, a message to a loved one,
+            or a reflection on your journey, Dear You is designed to create
+            moments of connection and introspection in our fast-paced world.
+          </p>
+          <Button
+            variant="primary"
+            className="mt-2 mb-4 self-start"
+            onClick={() => setShowMessage("intro")}
+          >
+            Back to Introduction
           </Button>
         </main>
       )}
