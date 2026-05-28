@@ -1,26 +1,171 @@
 @use "../styles/Variables.scss";
 
-.main-news-container {
+.main-content-container {
+  @include Variables.item-column-container;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+  .main {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+// ----------------------------- Home hero container --------------------------
+
+.home-hero-container {
+  @include Variables.item-row-container;
+  width: 100%;
+  height: 90dvh;
+  background-color: transparent;
+  padding: 4rem 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-image: radial-gradient(rgba(28, 26, 23, 0.89), var(--dy-dark-bg));
+
+  .home-hero-title {
+    font-size: 0.9rem;
+    text-align: center;
+    font-weight: 300;
+    color: var(--dy-dark-text-heading);
+  }
+
+  .home-hero-subtitle {
+    font-size: 1.6rem;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .home-hero-text {
+    font-size: 1rem;
+    text-align: center;
+    font-weight: 200;
+    color: var(--dy-dark-text-body);
+    max-width: 600px;
+    line-height: 1.4;
+  }
+
+  @media (min-width: 768px) {
+    .home-hero-subtitle {
+      font-size: 3rem;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .home-hero-text {
+      font-size: 1.4rem;
+    }
+  }
+}
+
+// ----------------------------- Dear You news container --------------------------
+
+.about-us-main-container {
+  @include Variables.item-column-container;
+  width: 100%;
+  height: fit-content;
+  padding: 5rem 0rem;
+  background-color: var(--dy-paper-bg);
+  background-image: var(--dy-ruled-lines);
+  gap: 25px;
+
+  .about-us-container {
+    @include Variables.item-column-container;
+    width: 80%;
+    height: fit-content;
+    padding: 2rem 1.3rem;
+    box-shadow: 0 0 0 0.5px var(--dy-dark-border);
+    border-radius: 12px;
+    background-color: var(--dy-paper-card-bg);
+    gap: 15px;
+
+    > h2 {
+      color: var(--dy-paper-text-heading);
+      font-size: 1.04rem;
+      text-align: center;
+    }
+
+    > p {
+      color: var(--dy-paper-text-body);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .about-us-container {
+      width: 60%;
+      padding: 6rem 6rem;
+      gap: 1.3rem;
+
+      > h2 {
+        font-size: 1.6rem;
+      }
+
+      > p {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .about-us-main-container {
+    padding: 7rem 0rem;
+    gap: 2rem;
+    .who-we-are {
+      font-size: 1rem;
+    }
+  }
+}
+
+// ----------------------------- Dear You news container --------------------------
+
+.dy-news-main-container {
+  @include Variables.item-column-container;
+  width: 100%;
+  height: fit-content;
+  padding: 7rem 0rem;
+  background-image: radial-gradient(rgba(28, 26, 23, 0.89), var(--dy-dark-bg));
+}
+
+ @media (min-width: 768px) {
+    .dy-news-main-container {
+      padding: 9rem 0rem;
+    }
+  }
+
+.dy-news-container {
   @include Variables.item-row-container;
   width: auto;
   max-width: 92%;
   min-height: 30%;
   height: fit-content;
-  background-color: var(--color-primary);
+  background-color: var(--dy-paper-bg);
   box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.5);
   padding: 20px 12px 20px 6px;
+  border-radius: 8px;
+  background-image: var(--dy-ruled-lines);
 
-  .mnc-left {
+  .dy-news-left {
     @include Variables.item-column-container;
     width: 50%;
     height: 100%;
-    border-right: 1px dotted var(--color-secondary);
-    padding: 0px 10px;
+    border-right: 1px dotted var(--dy-dark-border);
+    padding: 40px 10px;
+    gap: 10px;
 
     .dear-you-main-text {
-      font-size: 2rem;
+      font-size: 1.6rem;
       font-weight: 300;
-      font-family: var(--font-dear-you);
+      color: var(--dy-paper-text-heading);
     }
 
     .dear-you-tagline {
@@ -28,6 +173,7 @@
       text-wrap: wrap;
       text-align: center;
       font-weight: 200;
+      color: var(--dy-paper-text-body);
     }
 
     @media (min-width: 768px) {
@@ -37,7 +183,13 @@
     }
   }
 
-  .mnc-right {
+  @media (min-width: 768px) {
+    .dy-news-left {
+      padding: 70px 10px;
+    }
+  }
+
+  .dy-news-right {
     width: 50%;
     height: fit-content;
     display: flex;
@@ -46,7 +198,7 @@
     .stamp-box {
       width: 3.5rem;
       height: 4rem;
-      border: 1px dotted var(--color-secondary-accent);
+      border: 1px dotted var(--dy-dark-border);
       position: relative;
     }
 
@@ -64,6 +216,7 @@
       text-wrap: wrap;
       font-weight: 200;
       padding: 5px 0px;
+      color: var(--dy-paper-text-body);
     }
 
     @media (min-width: 768px) {
@@ -72,11 +225,17 @@
       }
     }
   }
+
+  @media (min-width: 768px) {
+    .dy-news-right {
+      padding: 0px 30px;
+    }
+  }
 }
 
 @media (min-width: 768px) {
-  .main-news-container {
-    width: 35%;
+  .dy-news-container {
+    width: 40%;
     padding-top: 3%;
     padding-bottom: 3%;
   }

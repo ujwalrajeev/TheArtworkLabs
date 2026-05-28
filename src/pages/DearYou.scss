@@ -2,24 +2,37 @@
 
 .dear-you-background {
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
-    url("/Background/old_paper_3.png");
+    linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.615)),
+    url("/Background/nature_2.jpg");
+  // background-color: var(--color-primary-accent);
+  // background-image: var(--dy-ruled-lines);
 }
 
 .dear-you-title {
   font-family: var(--font-dear-you);
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: bold;
+  color: var(--color-text-secondary);
 }
 
 .dear-you-message {
   font-family: var(--font-primary);
   font-size: 1rem;
   text-wrap: wrap;
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+.dear-you-message-container {
+  height: fit-content;
+  background-color: var(--color-primary);
+  //box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.5);
+  // background-image: var(--dy-ruled-lines);
 }
 
 @media (min-width: 768px) {
   .dear-you-message {
-    font-size: 1.4rem;
+    font-size: 1rem;
+    width: 60%;
   }
 }

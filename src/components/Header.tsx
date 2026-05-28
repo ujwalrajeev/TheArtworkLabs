@@ -1,3 +1,4 @@
+import "./Header.scss";
 import { Avatar, Dropdown, Label, Separator } from "@heroui/react";
 import {
   ArrowRightFromSquare,
@@ -19,14 +20,14 @@ type HeaderProps = {
   setOpenAuthModal: React.Dispatch<React.SetStateAction<boolean>>;
   subHeaderText?: string;
   subHeaderClassName?: string;
-  theme?: "primary" | "secondary";
+  backgroundTheme?: "paper" | "dark";
 };
 
 export default function Header({
   setOpenAuthModal,
   subHeaderText,
   subHeaderClassName,
-  theme = "primary",
+  backgroundTheme,
 }: HeaderProps) {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
   const [userDetails, setUserDetails] = useState({
@@ -66,7 +67,7 @@ export default function Header({
       <span className="flex items-center">
         <img
           className="first-look-logo"
-          src="/Logo/logo_v3_2.png"
+          src="/Logo/logo_v3_3.png"
           alt="The Artwork Labs Logo"
         />
         {subHeaderText && (
@@ -75,12 +76,15 @@ export default function Header({
       </span>
 
       <span className="flex gap-2 items-center">
-        <div className="bg-[var(--color-primary)] w-14 flex justify-end px-[2px]">
-          <p className="text-[var(--color-text-secondary)] font-[500]">Menu</p>
-        </div>
+        {/* <div className="bg-[var(--dy-dark-text-heading)] w-14 flex justify-end px-[2px]">
+          <p className="text-[var(--dy-paper-text-heading)] font-[500]">Menu</p>
+        </div> */}
         <Dropdown>
           <Dropdown.Trigger className="rounded-full">
-            <Bars className={`text-[var(--color-${theme})] size-7`} />
+            <Bars
+              style={{ color: `var(--dy-${backgroundTheme}-text-heading)` }}
+              className={"size-7"}
+            />
           </Dropdown.Trigger>
           <Dropdown.Popover className="min-w-[250px]">
             <div className="px-3 pt-3 pb-1">
@@ -90,16 +94,16 @@ export default function Header({
                     alt="Profile Picture"
                     src={userDetails.photoURL}
                   />
-                  <Avatar.Fallback className="bg-[var(--color-primary)]">
+                  <Avatar.Fallback className="bg-[var(--pastel-sage)] text-[var(--dy-${backgroundTheme}-text-heading)]">
                     <Person />
                   </Avatar.Fallback>
                 </Avatar>
-                <div className="flex flex-col gap-0">
+                <div className="flex flex-col gap-0 text-[var(--dy-${backgroundTheme}-text-heading)]">
                   <p className="text-sm leading-5 font-medium">
                     {isLoggedIn ? userDetails.name : "Guest"}
                   </p>
 
-                  <p className="text-xs leading-none text-muted">
+                  <p className="text-xs">
                     {isLoggedIn
                       ? userDetails.email
                       : "Log in to access all features!"}
@@ -155,12 +159,13 @@ export default function Header({
                   id="login"
                   textValue="Login"
                   onClick={() => setOpenAuthModal(true)}
+                  className="bg-[var(--pastel-sage)] hover:bg-[var(--pastel-sage-dark)]"
                 >
                   <div className="flex w-full items-center justify-between gap-2">
-                    <Label className="text-[var(--color-positive)]">
+                    <Label className="text-[var(--dy-${backgroundTheme}-text-heading)]">
                       Login / Sign up
                     </Label>
-                    <ArrowRightToSquare className="size-3.5 text-[var(--color-positive)]" />
+                    <ArrowRightToSquare className="size-3.5 text-[var(--dy-${backgroundTheme}-text-heading)]" />
                   </div>
                 </Dropdown.Item>
               </Dropdown.Menu>

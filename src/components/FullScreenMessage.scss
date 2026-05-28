@@ -1,0 +1,32 @@
+@use "../styles/Variables.scss";
+
+.fullscreen-message-container {
+  @include Variables.item-column-container;
+  width: 100%;
+  height: 100dvh;
+  background-color: var(--dy-dark-bg);
+  position: absolute;
+  z-index: 12;
+  top: 0;
+  left: 0;
+  padding: 4rem 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+
+  .fullscreen-message-title {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--dy-dark-text-heading);
+  }
+
+  .fullscreen-message-text {
+    font-size: 1rem;
+    font-weight: 200;
+    color: var(--dy-dark-text-body);
+    max-width: 600px;
+    line-height: 1.4;
+    margin: 0 auto;
+  }
+}
