@@ -13,7 +13,11 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
 
-    "types": []
+    "types": [],
+
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": ["src"]
 }

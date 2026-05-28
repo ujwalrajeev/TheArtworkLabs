@@ -1,0 +1,17 @@
+@use "../styles/Variables.scss";
+
+.footer-container {
+  @include Variables.item-row-container;
+  width: 100%;
+  height: fit-content;
+  background-color: rgba(28, 26, 23, 0.92);
+  transition:
+    background 0.35s,
+    border 0.35s,
+    backdrop-filter 0.35s;
+  background: rgba(28, 26, 23, 0.92);
+  border-top: 0.5px solid #4a4030;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.8rem 1rem;
+}

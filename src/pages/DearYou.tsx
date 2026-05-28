@@ -1,14 +1,19 @@
 import "./DearYou.scss";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import AuthenticationModal from "../components/AuthenticationModal";
 import { auth } from "../config/firebase-config";
 import { Button } from "@heroui/react";
 
 export default function DearYou() {
   const [openAuthModal, setOpenAuthModal] = useState<boolean>(false);
-  const [showMessage, setShowMessage] = useState<string>("about");
+
+  const aboutRef = useRef<HTMLDivElement>(null);
+
+  const scrollTo = (element: HTMLDivElement | null) => {
+    element?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   return (
     <div className="main-container dear-you-background">
@@ -17,8 +22,8 @@ export default function DearYou() {
         <AuthenticationModal setOpenAuthModal={setOpenAuthModal} />
       )}
 
-      {showMessage === "intro" && (
-        <main className="main-content-container px-6 text-[var(--color-text-secondary)]">
+      <main className="flex flex-col items-center gap-12">
+        <section className="main-content-container px-6 dear-you-message-container max-w-94 py-8">
           <h1 className="dear-you-title self-start">
             Dear {auth.currentUser?.displayName?.trim() || "You"},
             {/* FIXME: Reloading the page causes the name to disappear */}
@@ -59,39 +64,62 @@ export default function DearYou() {
           </p>
           <Button
             variant="primary"
-            className="mt-2 mb-4 self-start"
-            onClick={() => setShowMessage("about")}
+            className="mt-2 mb-4 self-start rounded-none"
+            onClick={() => scrollTo(aboutRef.current)}
           >
             Experience Dear You,
           </Button>
-        </main>
-      )}
+        </section>
 
-      {showMessage === "about" && (
-        <main className="main-content-container px-6 text-[var(--color-text-secondary)]">
-          <h1 className="dear-you-title self-start">Dear You,</h1>
-          <p className="dear-you-message self-start pt-3">
-            Dear You is a digital letter experience that brings back the joy of
-            receiving heartfelt messages. It’s a space where you can write and
-            receive letters that are meant to be cherished, not just read and
-            forgotten.
-          </p>
-          <p className="dear-you-message self-start pt-4">
-            Whether it’s a note to your future self, a message to a loved one,
-            or a reflection on your journey, Dear You is designed to create
-            moments of connection and introspection in our fast-paced world.
-          </p>
-          <Button
-            variant="primary"
-            className="mt-2 mb-4 self-start"
-            onClick={() => setShowMessage("intro")}
-          >
-            Back to Introduction
-          </Button>
-        </main>
-      )}
+        <section
+          className="main-content-container px-6 gap-6 dear-you-message-container max-w-94 py-8"
+          ref={aboutRef}
+        >
+          <h1 className="font-bold self-start text-xl italic">
+            What is Dear You?
+          </h1>
+          <div>
+            <p className="self-start pt-3">
+              A real letter, written by a real person, sent just for you.
+              Personalised to your life, your feelings, your story. Every month,
+              something meaningful lands at your door.
+            </p>
+          </div>
 
-      <Footer theme="secondary" />
+          <div className="flex flex-col gap-4 w-full items-center">
+            <div className="flex flex-row justify-between w-full">
+              <div className="w-45 px-4 py-2">
+                <h1 className="font-bold">1. Tell us about you</h1>
+                <p className="text-sm">
+                  Fill in your profile — interests, life moments, tone
+                </p>
+              </div>
+              <div className="w-45 px-4 py-2">
+                <h1 className="font-bold">2. We create your letter</h1>
+                <p className="text-sm">
+                  A real writer crafts something just for you
+                </p>
+              </div>
+            </div>
+            {/* Second row of features */}
+            <div className="flex flex-row justify-between w-full">
+              <div className="w-45 px-4 py-2">
+                <h1 className="font-bold">3. It arrives at your door</h1>
+                <p className="text-sm">
+                  Physical letter delivered to your doorstep
+                </p>
+              </div>
+              <div className="w-45 px-4 py-2">
+                <h1 className="font-bold">Reply and connect</h1>
+                <p className="text-sm">Build a real connection</p>
+              </div>
+            </div>
+            <p className="text-[var(--color-text-secondary)]">And more!</p>
+          </div>
+        </section>
+      </main>
+
+      <Footer backgroundTheme="dark" />
     </div>
   );
 }

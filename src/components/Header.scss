@@ -1,0 +1,40 @@
+@use "../styles/Variables.scss";
+
+.header-container {
+  @include Variables.item-row-container;
+  width: 100%;
+  padding: 0.2rem 1rem;
+  z-index: 2;
+  justify-content: space-between;
+  height: 10dvh;
+  background-color: var(--dy-dark-bg-secondary);
+  transition:
+    background 0.35s,
+    border 0.35s,
+    backdrop-filter 0.35s;
+  background: rgba(28, 26, 23, 0.92);
+  border-bottom: 0.5px solid #4a4030;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  .first-look-logo {
+    width: 5.5rem;
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .header-container {
+    padding-right: 2rem;
+    padding-left: 2rem;
+
+    .first-look-logo {
+      width: 6rem;
+    }
+  }
+}

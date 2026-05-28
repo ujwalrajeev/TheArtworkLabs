@@ -1,11 +1,16 @@
+import "./Footer.scss";
+
 type FooterProps = {
-  theme: "primary" | "secondary";
+  backgroundTheme: "paper" | "dark";
 };
 
-export default function Footer({ theme }: FooterProps) {
+export default function Footer({ backgroundTheme }: FooterProps) {
   return (
     <footer className="footer-container">
-      <p className={`text-[var(--color-text-${theme})] text-xs`}>
+      <p
+        style={{ color: `var(--dy-${backgroundTheme}-text-heading)` }}
+        className="text-xs"
+      >
         &copy; {new Date().getFullYear()} The Artwork Labs. All rights reserved.
       </p>
     </footer>
