@@ -1,38 +1,59 @@
 @use "../styles/Variables.scss";
 
-.dear-you-background {
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.615)),
-    url("/Background/nature_2.jpg");
-  // background-color: var(--color-primary-accent);
-  // background-image: var(--dy-ruled-lines);
-}
-
-.dear-you-title {
-  font-family: var(--font-dear-you);
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--color-text-secondary);
-}
-
-.dear-you-message {
-  font-family: var(--font-primary);
-  font-size: 1rem;
-  text-wrap: wrap;
-  font-style: italic;
-  color: var(--color-text-secondary);
-}
-
-.dear-you-message-container {
+.main-content-container {
+  @include Variables.item-column-container;
+  width: 100%;
   height: fit-content;
-  background-color: var(--color-primary);
-  //box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.5);
-  // background-image: var(--dy-ruled-lines);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 @media (min-width: 768px) {
-  .dear-you-message {
-    font-size: 1rem;
-    width: 60%;
+  .main {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
   }
+}
+
+// ----------------------------- Home hero container --------------------------
+
+.dy-hero-container {
+  @include Variables.item-column-container;
+  width: 100%;
+  height: 90dvh;
+  background-color: transparent;
+  padding: 4rem 20px;
+  justify-content: space-around;
+  //gap: 6rem;
+  background-image:
+    var(--dy-ruled-lines),
+    radial-gradient(var(--dy-paper-bg), rgb(249, 235, 207));
+
+  position: relative;
+
+  .dy-hero-title {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--dy-paper-text-heading);
+  }
+
+  .dy-hero-subtitle {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .dy-hero-text {
+    font-size: 1rem;
+    font-weight: 200;
+    color: var(--dy-paper-text-body);
+    max-width: 600px;
+    line-height: 1.4;
+  }
+}
+
+.letter-cover-text {
+  font-family: var(--font-dear-you);
+  font-size: 1rem;
 }

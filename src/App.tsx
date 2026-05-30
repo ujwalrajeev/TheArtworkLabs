@@ -8,7 +8,8 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/dearyou" element={<DearYou />} />
+        <Route path="/dearyou/" element={<DearYou />} />
+        <Route path="/about/" element={<div></div>} /> //TODO: Add about page
       </Routes>
     </>
   );
