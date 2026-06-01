@@ -4,8 +4,6 @@
   @include Variables.item-column-container;
   width: 100%;
   height: fit-content;
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
 }
 
@@ -17,21 +15,32 @@
   }
 }
 
-// ----------------------------- Home hero container --------------------------
+// ----------------------------- DY hero section --------------------------
 
-.dy-hero-container {
+.dy-hero-main-container {
   @include Variables.item-column-container;
   width: 100%;
-  height: 90dvh;
+  height: fit-content;
   background-color: transparent;
   padding: 4rem 20px;
   justify-content: space-around;
-  //gap: 6rem;
   background-image:
     var(--dy-ruled-lines),
     radial-gradient(var(--dy-paper-bg), rgb(249, 235, 207));
-
   position: relative;
+
+  .dy-hero-container {
+    @include Variables.item-column-container;
+    gap: 1rem;
+    align-items: flex-start;
+    height: fit-content;
+  }
+
+  @media (min-width: 768px) {
+    .dy-hero-container {
+      align-items: center;
+    }
+  }
 
   .dy-hero-title {
     font-size: 0.9rem;
@@ -51,9 +60,116 @@
     max-width: 600px;
     line-height: 1.4;
   }
+
+  @media (min-width: 768px) {
+    .dy-hero-text {
+      text-align: center;
+      font-size: 1.2rem;
+    }
+
+    .dy-hero-subtitle {
+      font-size: 3rem;
+    }
+  }
 }
 
 .letter-cover-text {
   font-family: var(--font-dear-you);
   font-size: 1rem;
+}
+
+// ----------------------------- DY hero section --------------------------
+
+.dy-about-section {
+  @include Variables.item-column-container;
+  width: 100%;
+  background-image: radial-gradient(rgba(28, 26, 23, 0.89), var(--dy-dark-bg));
+  padding: 5rem 1.7rem;
+  gap: 3rem;
+
+  .dy-about-tagline {
+    font-size: 2rem;
+    color: var(--dy-dark-text-heading);
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .dy-about-heading {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--dy-dark-text-heading);
+  }
+
+  .dy-about-text {
+    font-size: 0.9rem;
+    color: var(--dy-dark-text-body);
+    text-align: center;
+  }
+
+  .dy-about-description {
+    @include Variables.item-column-container;
+    gap: 1rem;
+    justify-content: flex-start;
+  }
+
+  .dy-card-container {
+    @include Variables.item-row-container;
+    gap: 1rem;
+    background-color: var(--pastel-wheat);
+  }
+
+  .dy-steps-card-number {
+    @include Variables.item-row-container;
+    width: 4rem;
+    height: 4rem;
+    background-color: var(--pastel-moss);
+    color: var(--dy-paper-text-heading);
+    border-radius: 0.8rem;
+    font-size: 1rem;
+  }
+
+  .dy-cards-column-container {
+    @include Variables.item-column-container;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .dy-cards-row-container {
+    @include Variables.item-column-container;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .dy-about-tagline {
+      font-size: 3rem;
+      color: var(--dy-dark-text-heading);
+    }
+
+    .dy-about-text {
+      font-size: 1.1rem;
+    }
+
+    .dy-about-description {
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      width: 50%;
+      align-self: center;
+    }
+
+    .dy-cards-column-container {
+      margin-top: 3rem;
+    }
+
+    .dy-cards-row-container {
+      @include Variables.item-row-container;
+      gap: 1rem;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .dy-about-section {
+    padding: 8rem 1.7rem;
+  }
 }

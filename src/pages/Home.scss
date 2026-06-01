@@ -17,7 +17,7 @@
   }
 }
 
-// ----------------------------- Home hero container --------------------------
+// ----------------------------- Home hero section --------------------------
 
 .home-hero-container {
   @include Variables.item-column-container;
@@ -82,7 +82,7 @@
   }
 }
 
-// ----------------------------- Dear You news container --------------------------
+// ----------------------------- Dear You news section --------------------------
 
 .about-us-main-container {
   @include Variables.item-column-container;
@@ -143,7 +143,7 @@
   }
 }
 
-// ----------------------------- Dear You news container --------------------------
+// ----------------------------- Dear You news section --------------------------
 
 .dy-news-main-container {
   @include Variables.item-column-container;
