@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { auth } from "../config/firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 import { logout } from "../services/firebase-auth";
+import { useNavigate } from "react-router-dom";
 
 type HeaderProps = {
   setOpenAuthModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -36,6 +37,11 @@ export default function Header({
     email: "ujwalrajeev@theartworklabs.com",
     photoURL: "",
   });
+  const navigate = useNavigate();
+
+  const navigateTo = (route: string) => {
+    navigate(route);
+  };
 
   const signOut = async () => {
     try {
@@ -69,6 +75,7 @@ export default function Header({
           className="first-look-logo"
           src="/Logo/logo_v3_3.png"
           alt="The Artwork Labs Logo"
+          onClick={() => navigateTo("/")}
         />
         {subHeaderText && (
           <h1 className={subHeaderClassName}>{subHeaderText}</h1>

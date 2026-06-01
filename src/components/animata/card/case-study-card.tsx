@@ -3,8 +3,14 @@ import type React from "react";
 import { cn } from "../../../libs/utils";
 import { useState, useRef, useEffect } from "react";
 
+type FunctionItem = {
+  functionText: string;
+  functionStatment: () => void;
+};
+
 interface CaseStudyCardProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
+  functions?: FunctionItem[];
   title?: string;
   category?: string;
   image?: string;
@@ -104,7 +110,7 @@ const HoverRevealSlip = ({
       {/* Sliding link/tab coming out from behind */}
       <div
         className={cn(
-          "z-1 absolute bottom-0 right-0 flex h-60 w-20 -translate-x-10 transform items-start justify-start rounded-r-lg bg-[var(--pastel-terracotta)] pl-2 pt-2 text-xs font-bold text-white transition-transform duration-300 ease-in-out backface-hidden group-hover/study:translate-x-0 group-hover/study:rotate-[5deg]",
+          "z-1 absolute bottom-0 right-0 flex h-60 w-20 -translate-x-10 transform items-start justify-start rounded-r-lg bg-[var(--pastel-terracotta)] pl-2 pt-2 text-xs font-bold text-white transition-transform duration-300 ease-in-out backface-hidden group-hover/study:translate-x-0 group-hover/study:rotate-[5deg] overflow-hidden",
           touched && "translate-x-0 rotate-[5deg]",
         )}
       >
@@ -119,6 +125,7 @@ const HoverRevealSlip = ({
 // Main CaseStudyCard Component
 export default function CaseStudyCard({
   children,
+  functions,
   title,
   category,
   link,
@@ -158,7 +165,9 @@ export default function CaseStudyCard({
             e.preventDefault();
             setTouched((prev) => !prev);
           } else {
-            console.log("works"); //TODO: Add click action to show message
+            if (functions) {
+              functions[0].functionStatment();
+            }
           }
         }}
       >

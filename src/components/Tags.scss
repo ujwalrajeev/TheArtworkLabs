@@ -1,0 +1,27 @@
+@use "../styles/Variables.scss";
+
+.tags-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid;
+  transition: flex 0.3s ease;
+}
+
+.tags-container:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .tags-container {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+}
