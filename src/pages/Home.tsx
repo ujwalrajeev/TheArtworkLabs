@@ -56,10 +56,6 @@ export default function Home() {
               </span>
 
               <span className="flex gap-1.5">
-                {/* <AnimatedGradientText
-                className={"home-hero-subtitle"}
-                children={"Human"}
-              /> */}
                 <p className="home-hero-subtitle text-[var(--dy-dark-text-body)]">
                   Human Connection"
                 </p>
@@ -129,7 +125,7 @@ export default function Home() {
               shortcuts. Just thoughtful things made for real people.
             </p>
             <Separator className="bg-[var(--dy-paper-card-border)]" />
-            <p className="italic !text-[var(--pastel-rose-light)]">
+            <p className="italic !text-[var(--pastel-terracotta)]">
               Based in Scotland. Made with Love
             </p>
           </div>
