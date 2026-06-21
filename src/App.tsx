@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import "./App.scss";
 import DearYou from "./pages/DearYou";
+import DearYouOnboard from "./pages/DearYouOnboard";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dearyou/" element={<DearYou />} />
+        <Route path="/dearyou/onboard/" element={<DearYouOnboard />} />
         <Route path="/about/" element={<div></div>} /> //TODO: Add about page
       </Routes>
     </>

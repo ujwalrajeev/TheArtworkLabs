@@ -24,7 +24,7 @@ export default function Home() {
   };
 
   return (
-    <div className="main-container">
+    <main className="main-container">
       {/*--------------------------- Header Section ---------------------------*/}
 
       <Header setOpenAuthModal={setOpenAuthModal} backgroundTheme="dark" />
@@ -186,6 +186,6 @@ export default function Home() {
       {/*--------------------------- Footer Section ---------------------------*/}
 
       <Footer backgroundTheme="dark" />
-    </div>
+    </main>
   );
 }

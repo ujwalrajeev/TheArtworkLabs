@@ -25,6 +25,7 @@
     "motion": "^12.40.0",
     "radix-ui": "^1.4.3",
     "react": "^19.2.4",
+    "react-country-state-city": "^1.1.13",
     "react-dom": "^19.2.4",
     "react-router-dom": "^7.13.2",
     "react-wrap-balancer": "^1.1.1",

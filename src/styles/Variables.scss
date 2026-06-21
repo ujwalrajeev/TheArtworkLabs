@@ -65,6 +65,7 @@
   --pastel-rose-dark: rgba(210, 160, 150, 0.1);
   --pastel-lavender-dark: rgba(180, 175, 215, 0.1);
   --pastel-terracotta-dark: rgba(210, 160, 140, 0.1);
+  --pastel-wheat-dark: #f0e3c6;
 }
 
 // -----------------------------Flex styling--------------------------
@@ -94,7 +95,7 @@
   max-width: 100%;
 }
 
-// -----------------------------Hero UI Theme--------------------------
+// -----------------------------Hero UI Theme----------------------------------
 
 @layer components {
   .button--primary {
@@ -102,7 +103,7 @@
     color: var(--dy-paper-text-heading);
 
     &:hover {
-      background-color: var(--pastel-moss-dark);
+      background-color: var(--pastel-moss-light);
     }
   }
 
@@ -175,6 +176,32 @@
   }
 }
 
+// -----------------------------Dear You Theme----------------------------------
+
+.dy-tabs-container {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .dy-tabs-container {
+    width: 70%;
+  }
+}
+
+.dy-tabs {
+  background-color: var(--dy-paper-bg);
+}
+
+.dy-tab {
+  color: var(--dy-paper-text-body);
+  &[aria-selected="true"] {
+    color: var(--dy-dark-bg);
+  }
+}
+
+.tabs__indicator {
+  background-color: var(--pastel-terracotta);
+}
 // ----------------------------- Useful later --------------------------
 
 // background-image:
