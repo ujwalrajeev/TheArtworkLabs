@@ -20,7 +20,7 @@ import {
 } from "@gravity-ui/icons";
 import Tags from "../components/Tags";
 import DualMarquee from "../components/DualMarquee";
-import AnimatedGradientText from "../components/animata/text/animated-gradient-text";
+import { useNavigate } from "react-router-dom";
 
 const LetterCover = () => {
   return (
@@ -159,7 +159,15 @@ const PricingItem = ({
 export default function DearYou() {
   const [openAuthModal, setOpenAuthModal] = useState<boolean>(false);
   const [openLetter, setOpenLetter] = useState<boolean>(false);
+
   const aboutDYRef = useRef(null);
+  const onboardRef = useRef(null);
+
+  const navigate = useNavigate();
+  const navigateTo = (route: string) => {
+    navigate(route);
+  };
+
   const tags = [
     { color: "#d4a898", tag: "writing" },
     { color: "#c4c0d8", tag: "photography" },
@@ -202,13 +210,13 @@ export default function DearYou() {
         <section className="dy-hero-main-container">
           {!openLetter && (
             <div className="dy-hero-container">
-              <span className="dy-hero-title flex flex-col gap-1">
+              <span className="dy-hero-title flex flex-col gap-1 items-center">
                 <p>DEAR YOU,</p>
                 <p className="text-[12px]">BY THE ARTWORK LABS</p>
               </span>
               <div className="dy-hero-subtitle flex flex-col">
                 <p>Some letters are</p>
-                <p className="text-[var(--dy-paper-text-body)]">
+                <p className="text-[var(--pastel-terracotta)]">
                   worth waiting for.
                 </p>
               </div>
@@ -230,15 +238,14 @@ export default function DearYou() {
                 ></CaseStudyCard>
               </div>
               <Button
-                variant="outline"
+                variant="primary"
                 className={
-                  "border-[var(--dy-paper-text-body)] text-[var(--dy-paper-text-heading)] mt-6 border-1 hover:text-white active:text-white"
+                  "bg-[var(--pastel-terracotta)] mt-6 border-1 hover:text-white active:text-white"
                 }
-                onClick={() => scrollTo(aboutDYRef)}
+                onClick={() => scrollTo(onboardRef)}
               >
                 Begin your Dear You Experience
               </Button>
-              {/*TODO: Change the onClick to the register page*/}
               <div className="flex self-center !mt-14 gap-2 text-[var(--dy-paper-text-body)]">
                 <p className="text-sm">Or scroll down to know more</p>
                 <ArrowDown />
@@ -691,6 +698,32 @@ export default function DearYou() {
               firstLetterFree={false}
             />
           </div>
+        </section>
+
+        {/*--------------------------- Bottom Section ---------------------------*/}
+
+        <section className="dy-hero-main-container gap-2" ref={onboardRef}>
+          <p className="dy-hero-title !mt-8">YOUR FIRST LETTER IS FREE</p>
+          <div className="dy-hero-subtitle flex flex-col items-center mt-4 mb-4">
+            <p>Your letter is waiting</p>
+            <p className="text-[var(--pastel-terracotta)]">to find you</p>
+          </div>
+          <p className="dy-hero-text text-center">
+            No commitment. No complexity. Just something warm arriving at your
+            door.
+          </p>
+          <Button
+            variant="primary"
+            className={
+              "bg-[var(--pastel-terracotta)] mt-6 border-1 hover:text-white active:text-white"
+            }
+            onClick={() => navigateTo("/dearyou/onboard/")}
+          >
+            Begin your Dear You Experience
+          </Button>
+          <p className="dy-hero-text italic !mt-6 !mb-3">
+            Yours lovingly, Dear You Team
+          </p>
         </section>
       </main>
 

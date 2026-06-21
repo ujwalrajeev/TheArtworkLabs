@@ -32,7 +32,6 @@
   .dy-hero-container {
     @include Variables.item-column-container;
     gap: 1rem;
-    align-items: flex-start;
     height: fit-content;
   }
 
@@ -59,6 +58,7 @@
     color: var(--dy-paper-text-body);
     max-width: 600px;
     line-height: 1.4;
+    text-align: center;
   }
 
   @media (min-width: 768px) {
