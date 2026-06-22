@@ -171,3 +171,20 @@ h1 {
     @apply font-sans;
   }
 }
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dy-paper-text-muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dy-dark-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dy-paper-text-body);
+}
