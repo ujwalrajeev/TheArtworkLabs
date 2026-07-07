@@ -14,4 +14,15 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   padding: 0.8rem 1rem;
+
+  .footer-main-text {
+    font-size: 0.68rem;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .footer-main-text {
+      font-size: 0.8rem;
+    }
+  }
 }

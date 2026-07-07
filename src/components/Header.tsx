@@ -8,6 +8,7 @@ import {
   Person,
   PersonWorker,
   Folders,
+  Handset,
 } from "@gravity-ui/icons";
 
 import { useAuthStore } from "../utils/state-machine";
@@ -123,25 +124,31 @@ export default function Header({
                 <Dropdown.Item id="profile" textValue="Profile">
                   <div className="flex w-full items-center justify-between gap-2">
                     <Label>Profile</Label>
-                    <Person className="size-3.5 text-muted" />
+                    <Person className="size-3.5" />
                   </div>
                 </Dropdown.Item>
                 <Dropdown.Item id="about" textValue="about">
                   <div className="flex w-full items-center justify-between gap-2">
                     <Label>About Us</Label>
-                    <Persons className="size-3.5 text-muted" />
+                    <Persons className="size-3.5" />
                   </div>
                 </Dropdown.Item>
                 <Dropdown.Item id="portfolio" textValue="portfolio">
                   <div className="flex w-full items-center justify-between gap-2">
                     <Label>Portfolio</Label>
-                    <Folders className="size-3.5 text-muted" />
+                    <Folders className="size-3.5" />
                   </div>
                 </Dropdown.Item>
                 <Dropdown.Item id="help" textValue="help">
                   <div className="flex w-full items-center justify-between gap-2">
                     <Label>Help</Label>
-                    <PersonWorker className="size-3.5 text-muted" />
+                    <PersonWorker className="size-3.5" />
+                  </div>
+                </Dropdown.Item>
+                <Dropdown.Item id="contact" textValue="contact us">
+                  <div className="flex w-full items-center justify-between gap-2">
+                    <Label>Contact Us</Label>
+                    <Handset className="size-3.5" />
                   </div>
                 </Dropdown.Item>
                 <Separator className="opacity-50" />
@@ -173,6 +180,18 @@ export default function Header({
                       Login / Sign up
                     </Label>
                     <ArrowRightToSquare className="size-3.5 text-[var(--dy-${backgroundTheme}-text-heading)]" />
+                  </div>
+                </Dropdown.Item>
+                <Dropdown.Item id="help" textValue="help">
+                  <div className="flex w-full items-center justify-between gap-2">
+                    <Label>Help</Label>
+                    <PersonWorker className="size-3.5" />
+                  </div>
+                </Dropdown.Item>
+                <Dropdown.Item id="contact" textValue="contact us">
+                  <div className="flex w-full items-center justify-between gap-2">
+                    <Label>Contact Us</Label>
+                    <Handset className="size-3.5" />
                   </div>
                 </Dropdown.Item>
               </Dropdown.Menu>

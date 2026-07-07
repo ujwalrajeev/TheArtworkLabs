@@ -9,7 +9,7 @@ export default function Footer({ backgroundTheme }: FooterProps) {
     <footer className="footer-container">
       <p
         style={{ color: `var(--dy-${backgroundTheme}-text-heading)` }}
-        className="text-xs"
+        className="footer-main-text"
       >
         &copy; {new Date().getFullYear()} The Artwork Labs. All rights reserved.
       </p>

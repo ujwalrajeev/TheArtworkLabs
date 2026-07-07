@@ -31,8 +31,9 @@ export default function FullScreenMessage({
   helpButton,
   buttons,
 }: FullScreenMessageProps) {
-  const [animationDone, setAnimationDone] = useState(false);
-
+  const [animationDone, setAnimationDone] = useState(
+    type === "General" ? true : false,
+  );
   const opts: LottieOptions<"svg"> = {
     ...(animationOptions ?? ({} as LottieOptions<"svg">)),
     onComplete: () => setAnimationDone(true),
@@ -61,14 +62,17 @@ export default function FullScreenMessage({
         buttons[0].buttonFunc();
       }
     }
+    if (type === "General") {
+      show(false);
+    }
   };
 
   return (
     <div className="fullscreen-message-container">
-      {View}
+      {animationOptions && View}
       {animationDone && (
-        <div className="flex flex-col items-center gap-4">
-          <div>
+        <div className="flex flex-col items-center gap-4 px-1">
+          <div className="flex flex-col items-center gap-2">
             {title && <h1 className="fullscreen-message-title">{title}</h1>}
             {message && <p className="fullscreen-message-text">{message}</p>}
           </div>

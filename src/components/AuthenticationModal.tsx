@@ -33,10 +33,12 @@ import { LottieComponentProps } from "lottie-react";
 
 type AuthenticationModalProps = {
   setOpenAuthModal: React.Dispatch<React.SetStateAction<boolean>>;
+  authType?: "signup" | "login";
 };
 
 export default function AuthenticationModal({
   setOpenAuthModal,
+  authType,
 }: AuthenticationModalProps) {
   type AuthType =
     | "signup"
@@ -47,7 +49,7 @@ export default function AuthenticationModal({
     | "passwordsent"
     | "emailnotverified";
 
-  const [type, setType] = useState<AuthType>("signup");
+  const [type, setType] = useState<AuthType>(authType || "signup");
   const titles: Record<AuthType, string> = {
     signup: "Sign Up",
     login: "Log In",
@@ -113,7 +115,7 @@ export default function AuthenticationModal({
         const userCredential = await signUp(email, password);
         await updateUserProfile({ displayName: fullName });
         useAuthStore.getState().setUser(userCredential.user);
-        //TODO: Show the Full Screen Message
+
         setMessageModalData((prev) => ({
           ...prev,
           type: "Auth",
@@ -160,7 +162,7 @@ export default function AuthenticationModal({
       }
       useAuthStore.getState().setIsLoggedIn(true);
       useAuthStore.getState().setUser(userCredential.user);
-      //TODO: Show the Full Screen Message
+
       setMessageModalData((prev) => ({
         ...prev,
         title: "Welcome back, " + userCredential.user.displayName,
