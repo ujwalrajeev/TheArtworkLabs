@@ -8,7 +8,6 @@ import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 import { Separator } from "@heroui/react";
-//import CaseStudyCard from "../components/animata/card/case-study-card";
 import AnimatedGradientText from "../components/animata/text/animated-gradient-text";
 import Counter from "../components/animata/text/counter";
 import { scrollTo } from "../utils/tal-utils";
